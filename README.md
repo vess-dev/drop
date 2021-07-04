@@ -2,11 +2,8 @@
 
 ## Building
 
-Requirements:
-Linux
-Rust & Cargo
-
 Required tools installed on the system path:
+cargo
 strip
 sstrip (from elfkickers)
 upx
