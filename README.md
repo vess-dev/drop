@@ -18,6 +18,7 @@ target/release/drop
 
 ## Help
 
+```
 usage:
 
 drop chance: f64 = (0, 100)
@@ -29,6 +30,7 @@ drop <drop chance> <chests> <trials>
 
 Example usage:
 	drop 4.55 20 10000000
+```
 
 ## License
 
