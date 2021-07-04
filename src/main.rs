@@ -1,7 +1,6 @@
 use rand::distributions::{Weighted, WeightedChoice, Distribution};
 use std::env;
 use std::process::exit;
-use std::u32;
 
 fn help() {
 	println!("usage:
