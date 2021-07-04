@@ -1,12 +1,35 @@
 # drop
 
-## Building
+## Running the program
 
 Required tools installed on the system path:
-cargo
-strip
-sstrip (from elfkickers)
-upx
+- cargo
+
+```
+git clone https://github.com/vess-dev/drop
+cd drop
+cargo run
+```
+
+## Compiling a large test build
+
+Required tools installed on the system path:
+- cargo
+
+```
+git clone https://github.com/vess-dev/drop
+cd drop
+cargo build --release
+target/release/drop
+```
+
+## Compiling a small distributed build
+
+Required tools installed on the system path:
+- cargo
+- strip
+- sstrip (from elfkickers)
+- upx
 
 ```
 git clone https://github.com/vess-dev/drop
@@ -26,7 +49,7 @@ chests: u64 = (0, max]
 trials: u64 = (0, max]
 
 drop <drop chance> <chests> <trials>
-	Check the total chance out of N trials to recieve 1 item out of N chests if the item has N drop chance.
+	Check the total chance out of N trials to receive 1 item out of N chests if the item has N drop chance.
 
 Example usage:
 	drop 4.55 20 10000000
