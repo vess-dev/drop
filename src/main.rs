@@ -10,7 +10,7 @@ chests: u64 = (0, max]
 trials: u64 = (0, max]
 
 drop <drop chance> <chests> <trials>
-	Check the total chance out of N trials to recieve 1 item out of N chests if the item has N drop chance.
+	Check the total chance out of N trials to receive 1 item out of N chests if the item has N drop chance.
 
 Example usage:
 	drop 4.55 20 10000000");
@@ -93,5 +93,5 @@ fn main() {
 		}
 	}
 	let trials_perc: f64 = (100.0/trials_total as f64) * trials_success as f64;
-	println!("Out of {} trials, an item was pulled from {} chests: {:.2}% of the time.", trials_total, trials_chests, trials_perc);
+	println!("Out of [{}] trials an item with a drop chance of [{}%] was dropped from [{}] chests [{:.2}%] of the time.", trials_total, weight_drop as f64 / 100.0, trials_chests, trials_perc);
 }
