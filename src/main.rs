@@ -32,39 +32,33 @@ fn main() {
 				println!("Error: drop chance: f64 = (0, 100)\n");
 				help();
 				exit(1);
-			} else {
-				if let Ok(value) = test_drop {
-					if value >= 100.0 {
-						println!("Error: drop chance >= 100\n");
-						help();
-						exit(1);
-					}
+			} else if let Ok(value) = test_drop {
+				if value >= 100.0 {
+					println!("Error: drop chance >= 100\n");
+					help();
+					exit(1);
 				}
 			}
 			if let Err(_e) = test_chests {
 				println!("Error: chests: u64 = (0, max]\n");
 				help();
 				exit(1);
-			} else {
-				if let Ok(value) = test_chests {
-					if value == 0 {
-						println!("Error: chest = 0\n");
-						help();
-						exit(1);
-					}
+			} else if let Ok(value) = test_chests {
+				if value == 0 {
+					println!("Error: chest = 0\n");
+					help();
+					exit(1);
 				}
 			}
 			if let Err(_e) = test_trials {
 				println!("Error: trials: u64 = (0, max]\n");
 				help();
 				exit(1);
-			} else {
-				if let Ok(value) = test_trials {
-					if value == 0 {
-						println!("Error: trials = 0\n");
-						help();
-						exit(1);
-					}
+			} else if let Ok(value) = test_trials {
+				if value == 0 {
+					println!("Error: trials = 0\n");
+					help();
+					exit(1);
 				}
 			}
 		}
@@ -87,7 +81,7 @@ fn main() {
 	for _trial in 0..trials_total {
 		for _chest in 0..trials_chests {
 			if drop_chest.sample(&mut sys_rng) {
-				trials_success = trials_success + 1;
+				trials_success += 1;
 				break;
 			}
 		}
