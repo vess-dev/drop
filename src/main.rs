@@ -111,7 +111,7 @@ fn makesplit(arg_num: u32, arg_div: u32) -> Vec<u32> {
 fn main() {
     let time_start: Instant = Instant::now();
     let (arg_drop, arg_chests, arg_trials): (f32, u32, u32) = verify();
-    // Create a weighted choice chest based on the chance.
+    // Create stats for the weighted chest.
     let weight_drop: u32 = (arg_drop * 100.0) as u32;
     let weight_other: u32 = 10_000 - weight_drop;
     let drop_choice: &[bool; 2] = &[true, false];
@@ -122,7 +122,7 @@ fn main() {
         .expect("Duration since UNIX_EPOCH failed.");
     // Batch out the threads appropriately based on CPU cores.
     let cpu_count: u32 = num_cpus::get() as u32;
-    // Create a thread per trial batch, and add to a vector pool.
+    // Create a thread per trial batch, and add the thread to a vector pool.
     let mut vec_thread: Vec<JoinHandle<u32>> = Vec::with_capacity(cpu_count as usize);
     let vec_split: Vec<u32> = makesplit(arg_trials, cpu_count);
     for temp_split in vec_split {
