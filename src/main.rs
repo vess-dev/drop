@@ -12,6 +12,7 @@ use std::process::exit;
 use std::thread::{self, JoinHandle};
 use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 
+// Print infomation about the program.
 fn help() {
     println!("usage:
 
@@ -26,7 +27,7 @@ Example usage:
 	drop 4.55 20 1,000,000");
 }
 
-// Collect the args and verify them.
+// Collect the args and verify them winthin limits.
 fn verify() -> (f32, u32, u32) {
     let sys_args: Vec<String> = env::args().collect();
     match sys_args.len() {
@@ -35,11 +36,13 @@ fn verify() -> (f32, u32, u32) {
             exit(1);
         }
         4 => {
+            // Parse the arguments to ints.
             let test_drop: Result<f32, ParseFloatError> = sys_args[1].parse::<f32>();
             let test_chests: Result<u32, ParseIntError> =
                 sys_args[2].replace(",", "").parse::<u32>();
             let test_trials: Result<u32, ParseIntError> =
                 sys_args[3].replace(",", "").parse::<u32>();
+            // Check that the drop chance arg is within the bounds.
             if let Err(_e) = test_drop {
                 println!("Error: drop chance: f32 = (0.0, 100.0)\n");
                 help();
@@ -51,6 +54,7 @@ fn verify() -> (f32, u32, u32) {
                     exit(1);
                 }
             }
+            // Check that the chests arg is within the bounds.
             if let Err(_e) = test_chests {
                 println!("Error: chests: u32 = (0, 4,294,967,295]\n");
                 help();
@@ -62,6 +66,7 @@ fn verify() -> (f32, u32, u32) {
                     exit(1);
                 }
             }
+            // Check that the trials arg is within the bounds.
             if let Err(_e) = test_trials {
                 println!("Error: trials: u32 = (0, 4,294,967,295]\n");
                 help();
@@ -88,7 +93,7 @@ fn verify() -> (f32, u32, u32) {
     }
 }
 
-// Split a number into a batch of near-equal sized numbers.
+// Split a number into a vector of near-equal sized parts.
 fn makesplit(arg_num: u32, arg_div: u32) -> Vec<u32> {
     let vec_capacity: usize = (arg_num as f32 / arg_div as f32).ceil() as usize;
     let mut vec_count: Vec<u32> = Vec::with_capacity(vec_capacity);
@@ -105,18 +110,18 @@ fn makesplit(arg_num: u32, arg_div: u32) -> Vec<u32> {
 fn main() {
     let time_start: Instant = Instant::now();
     let (arg_drop, arg_chests, arg_trials): (f32, u32, u32) = verify();
-    // Create a weighted choice crate.
+    // Create a weighted choice chest based on the chance.
     let weight_drop: u32 = (arg_drop * 100.0) as u32;
     let weight_other: u32 = 10_000 - weight_drop;
     let drop_choice: &[bool; 2] = &[true, false];
     let drop_weight: [u32; 2] = [weight_drop, weight_other];
-    // Setup the RNG (thread safe).
+    // Setup the RNG for the chests. (thread safe)
     let time_rng: Duration = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .expect("Duration since UNIX_EPOCH failed.");
-    // Batch out the threads appropriately.
+    // Batch out the threads appropriately based on CPU cores.
     let cpu_count: u32 = num_cpus::get() as u32;
-    // Create a thread per trial, Arc and Mutex for sharing.
+    // Create a thread per trial batch, and add to a vector pool.
     let mut vec_thread: Vec<JoinHandle<u32>> = Vec::with_capacity(cpu_count as usize);
     let vec_split: Vec<u32> = makesplit(arg_trials, cpu_count);
     for temp_split in vec_split {
@@ -137,11 +142,12 @@ fn main() {
         });
         vec_thread.push(trial_thread);
     }
+    // Tabulate the results from each thread.
     let mut vec_success: u32 = 0;
     for temp_thread in vec_thread {
         vec_success += temp_thread.join().unwrap();
     }
-    // Print out all of the stats.
+    // Print out all of the stats in a pretty table.
     let trial_perc: f32 = (100.0 / arg_trials as f32) * (vec_success as f32);
     let trial_num: String = arg_trials.to_formatted_string(&Locale::en);
     let table_data = table!(["Chance to drop", r->format!("{}%", arg_drop.to_string())],
