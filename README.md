@@ -30,7 +30,7 @@ cd drop
 cargo run
 ```
 
-## Compiling a **large** `release build`
+## Compiling a _large_ `release build`
 
 Required tools installed on the system path:
 - cargo and a Rust toolchain installed
