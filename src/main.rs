@@ -80,11 +80,11 @@ fn verify() -> (f32, u32, u32) {
                 }
             }
             // Return if all are correct.
-            (
+            return (
                 test_drop.unwrap(),
                 test_chests.unwrap(),
                 test_trials.unwrap(),
-            )
+            );
         }
         _ => {
             println!("Incorrect number of arguments.\n");
@@ -105,7 +105,7 @@ fn makesplit(arg_num: u32, arg_div: u32) -> Vec<u32> {
             vec_count.push(arg_num / arg_div);
         }
     }
-    vec_count
+    return vec_count;
 }
 
 fn main() {
@@ -139,7 +139,7 @@ fn main() {
                     }
                 }
             }
-            trial_success
+            return trial_success;
         });
         vec_thread.push(trial_thread);
     }
