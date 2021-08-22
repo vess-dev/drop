@@ -7,7 +7,7 @@
 ```
 usage:
 
-drop chance: f32 = (0.0, 100.0)
+drop chance: f32 = (0.##, 100.##)
 chests: u32 = (0, 4,294,967,295]
 trials: u32 = (0, 4,294,967,295]
 

@@ -3,6 +3,7 @@ extern crate num_cpus;
 extern crate prettytable;
 
 use num_format::{Locale, ToFormattedString};
+use prettytable::{Table};
 use rand::distributions::WeightedIndex;
 use rand::prelude::*;
 use rand::SeedableRng;
@@ -16,7 +17,7 @@ use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 fn help() {
     println!("usage:
 
-drop chance: f32 = (0.0, 100.0)
+drop chance: f32 = (0.##, 100.##)
 chests: u32 = (0, 4,294,967,295]
 trials: u32 = (0, 4,294,967,295]
 
@@ -44,12 +45,12 @@ fn verify() -> (f32, u32, u32) {
                 sys_args[3].replace(",", "").parse::<u32>();
             // Check that the drop chance arg is within the bounds.
             if let Err(_e) = test_drop {
-                println!("Error: drop chance: f32 = (0.0, 100.0)\n");
+                println!("Error: drop chance: f32 = (0.##, 100.##)\n");
                 help();
                 exit(1);
             } else if let Ok(value) = test_drop {
                 if value >= 100.0 {
-                    println!("Error: drop chance >= 100.0\n");
+                    println!("Error: drop chance >= 100.##\n");
                     help();
                     exit(1);
                 }
@@ -150,9 +151,9 @@ fn main() {
     // Print out all of the stats in a pretty table.
     let trial_perc: f32 = (100.0 / arg_trials as f32) * (vec_success as f32);
     let trial_num: String = arg_trials.to_formatted_string(&Locale::en);
-    let table_data = table!(["Chance to drop", r->format!("{}%", arg_drop.to_string())],
+    let table_data: Table = table!(["Chance to drop", r->format!("{}%", arg_drop.to_string())],
 				["Number of chests", r->arg_chests.to_string()],
-                       		["Number of trials", r->trial_num],
+                ["Number of trials", r->trial_num],
 				["Calculated chance", r->format!("{:.2}%", trial_perc)],
 				["Elapsed time (sec)", r->time_start.elapsed().as_secs_f64().to_string()]);
     table_data.printstd();
