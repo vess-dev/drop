@@ -1,6 +1,8 @@
 # drop
 
-## Help
+![Example](example.png)
+
+## Help with drop
 
 ```
 usage:
