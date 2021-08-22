@@ -6,8 +6,8 @@
 usage:
 
 drop chance: f32 = (0.0, 100.0)
-chests: u32 = (0, max]
-trials: u32 = (0, max]
+chests: u32 = (0, 4,294,967,295]
+trials: u32 = (0, 4,294,967,295]
 
 drop <drop chance> <chests> <trials>
 	Check the total chance out of N trials to receive 1 item out of N chests if the item has N drop chance.
