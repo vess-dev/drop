@@ -21,7 +21,8 @@ Example usage:
 ## Running the program
 
 Required tools installed on the system path:
-- cargo
+- cargo and a rust toolchain installed
+- git
 
 ```
 git clone https://github.com/vess-dev/drop
@@ -32,7 +33,8 @@ cargo run
 ## Compiling a large test build
 
 Required tools installed on the system path:
-- cargo
+- cargo and a rust toolchain installed
+- git
 
 ```
 git clone https://github.com/vess-dev/drop
@@ -44,7 +46,8 @@ target/release/drop
 ## Compiling a small distributed build
 
 Required tools installed on the system path:
-- cargo
+- cargo and a rust toolchain installed
+- git
 - strip
 - sstrip (from elfkickers)
 - upx
@@ -56,6 +59,10 @@ chmod +x build.sh
 ./build.sh
 target/release/drop
 ```
+
+## Compiling a Windows build
+
+Instructions can be found commented in `build.sh`.
 
 ## License
 
