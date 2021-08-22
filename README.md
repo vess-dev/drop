@@ -30,7 +30,7 @@ cd drop
 cargo run
 ```
 
-## Compiling a large `release build`
+## Compiling a **large** `release build`
 
 Required tools installed on the system path:
 - cargo and a Rust toolchain installed
@@ -43,7 +43,7 @@ cargo build --release
 target/release/drop
 ```
 
-## Compiling a small `release build`
+## Compiling a _small_ `release build`
 
 Required tools installed on the system path:
 - cargo and a Rust toolchain installed
@@ -60,7 +60,7 @@ chmod +x build.sh
 target/release/drop
 ```
 
-## Crosscompile a small `Windows build`
+## Crosscompile a _small_ `Windows build`
 
 Required tools installed on the system path:
 - cargo and a Windows Rust target installed
@@ -68,7 +68,7 @@ Required tools installed on the system path:
 - strip
 - upx
 
-Warning: Crosscompilation for Windows is broken in Rust currently.
+Warning: Crosscompilation for Windows is <u>broken</u> on some Linux distributions.
 How to fix: https://wiki.archlinux.org/title/rust#Windows
 
 ```
