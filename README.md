@@ -2,7 +2,7 @@
 
 ![Example](example.png)
 
-## Help with drop
+## Help with `drop`
 
 ```
 usage:
@@ -18,10 +18,10 @@ Example usage:
 	drop 4.55 20 1,000,000
 ```
 
-## Running the program
+## Running the program, debug build
 
 Required tools installed on the system path:
-- cargo and a rust toolchain installed
+- cargo and a Rust toolchain installed
 - git
 
 ```
@@ -30,10 +30,10 @@ cd drop
 cargo run
 ```
 
-## Compiling a large test build
+## Compiling a large release build
 
 Required tools installed on the system path:
-- cargo and a rust toolchain installed
+- cargo and a Rust toolchain installed
 - git
 
 ```
@@ -43,10 +43,10 @@ cargo build --release
 target/release/drop
 ```
 
-## Compiling a small distributed build
+## Compiling a small release build
 
 Required tools installed on the system path:
-- cargo and a rust toolchain installed
+- cargo and a Rust toolchain installed
 - git
 - strip
 - sstrip (from elfkickers)
@@ -60,9 +60,24 @@ chmod +x build.sh
 target/release/drop
 ```
 
-## Compiling a Windows build
+## Crosscompile a small Windows build
 
-Instructions can be found commented in `build.sh`.
+Required tools installed on the system path:
+- cargo and a Windows Rust target installed
+- git
+- strip
+- upx
+
+Warning: Crosscompilation for Windows is broken in Rust currently.
+How to fix: https://wiki.archlinux.org/title/rust#Windows
+
+```
+git clone https://github.com/vess-dev/drop
+cd drop
+cargo build --release --target x86_64-pc-windows-gnu
+strip target/x86_64-pc-windows-gnu/release/drop.exe
+upx --lzma target/x86_64-pc-windows-gnu/release/drop.exe
+```
 
 ## License
 
