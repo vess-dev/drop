@@ -1,4 +1,4 @@
-# drop
+# `drop`
 
 ![Example](example.png)
 
@@ -18,7 +18,7 @@ Example usage:
 	drop 4.55 20 1,000,000
 ```
 
-## Running the program, debug build
+## Running the program, `debug build`
 
 Required tools installed on the system path:
 - cargo and a Rust toolchain installed
@@ -30,7 +30,7 @@ cd drop
 cargo run
 ```
 
-## Compiling a large release build
+## Compiling a large `release build`
 
 Required tools installed on the system path:
 - cargo and a Rust toolchain installed
@@ -43,7 +43,7 @@ cargo build --release
 target/release/drop
 ```
 
-## Compiling a small release build
+## Compiling a small `release build`
 
 Required tools installed on the system path:
 - cargo and a Rust toolchain installed
@@ -60,7 +60,7 @@ chmod +x build.sh
 target/release/drop
 ```
 
-## Crosscompile a small Windows build
+## Crosscompile a small `Windows build`
 
 Required tools installed on the system path:
 - cargo and a Windows Rust target installed
