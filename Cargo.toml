@@ -1,10 +1,11 @@
 [package]
 name = "drop"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2018"
 
 [dependencies]
-rand = "0.5.0"
+num_cpus = "1.13.0"
+rand = "0.8.4"
 
 [profile.release]
 codegen-units = 1
