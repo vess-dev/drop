@@ -114,7 +114,7 @@ fn main() {
     // Create stats for the weighted chest.
     let weight_drop: u32 = (arg_drop * 100.0) as u32;
     let weight_other: u32 = 10_000 - weight_drop;
-    let drop_choice: &[bool; 2] = &[true, false];
+    let drop_choice: [bool; 2] = [true, false];
     let drop_weight: [u32; 2] = [weight_drop, weight_other];
     // Setup the RNG for the chests. (thread safe)
     let time_rng: Duration = SystemTime::now()
@@ -127,7 +127,7 @@ fn main() {
     let vec_split: Vec<u32> = makesplit(arg_trials, cpu_count);
     for temp_split in vec_split {
         // Thread and split the number of trials appropriately.
-        let drop_chest: WeightedIndex<u32> = WeightedIndex::new(&drop_weight).unwrap();
+        let drop_chest: WeightedIndex<u32> = WeightedIndex::new(drop_weight).unwrap();
         let mut sys_rng: StdRng = rand::rngs::StdRng::seed_from_u64(time_rng.as_secs());
         let trial_thread: JoinHandle<u32> = thread::spawn(move || {
             let mut trial_success: u32 = 0;
@@ -149,7 +149,7 @@ fn main() {
         vec_success += temp_thread.join().unwrap();
     }
     // Print out all of the stats in a pretty table.
-    let trial_perc: f32 = (100.0 / arg_trials as f32) * (vec_success as f32);
+    let trial_perc: f64 = (100.0 / arg_trials as f64) * (vec_success as f64);
     let trial_num: String = arg_trials.to_formatted_string(&Locale::en);
     let table_data: Table = table!(["Chance to drop", r->format!("{}%", arg_drop.to_string())],
 				["Number of chests", r->arg_chests.to_string()],
