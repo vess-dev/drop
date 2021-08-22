@@ -1,5 +1,6 @@
 extern crate num_cpus;
 
+use num_format::{Locale, ToFormattedString};
 use rand::prelude::*;
 use rand::distributions::WeightedIndex;
 use rand::SeedableRng;
@@ -17,7 +18,7 @@ chests: u32 = (0, 4,294,967,295]
 trials: u32 = (0, 4,294,967,295]
 
 drop <drop chance> <chests> <trials>
-	Check the total chance out of N trials to receive 1 item out of N chests if the item has N drop chance.
+	Simulate the chance out of N trials to get at least 1 item from N chests if the item has N drop chance.
 
 Example usage:
 	drop 4.55 20 1,000,000");
@@ -131,5 +132,6 @@ fn main() {
     }
 	// Print out the stats.
 	let trial_perc: f32 = (100.0 / arg_trials as f32) * (vec_success as f32);
-	println!("Out of [{}] trials an item with a drop chance of [{}%] was dropped from [{}] chests [{:.2}%] of the time.", arg_trials, arg_drop, arg_chests, trial_perc);
+	let trial_num: String = arg_trials.to_formatted_string(&Locale::en);
+	println!("Out of [{}] trials an item with a drop chance of [{}%] dropped at least once from [{}] chests [{:.2}%] of the time.", trial_num, arg_drop, arg_chests, trial_perc);
 }

@@ -10,7 +10,7 @@ chests: u32 = (0, 4,294,967,295]
 trials: u32 = (0, 4,294,967,295]
 
 drop <drop chance> <chests> <trials>
-	Check the total chance out of N trials to receive 1 item out of N chests if the item has N drop chance.
+	Simulate the chance out of N trials to get at least 1 item from N chests if the item has N drop chance.
 
 Example usage:
 	drop 4.55 20 1,000,000
