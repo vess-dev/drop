@@ -17,12 +17,12 @@ use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 fn help() {
     println!("usage:
 
+drop <drop chance> <chests> <trials>
+	Simulate the chance out of N trials to get at least 1 item from N chests if the item has N drop chance.
+
 drop chance: f32 = (0.##, 100.##)
 chests: u32 = (0, 4,294,967,295]
 trials: u32 = (0, 4,294,967,295]
-
-drop <drop chance> <chests> <trials>
-	Simulate the chance out of N trials to get at least 1 item from N chests if the item has N drop chance.
 
 Example usage:
 	drop 4.55 20 1,000,000");
