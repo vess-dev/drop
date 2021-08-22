@@ -145,9 +145,9 @@ fn main() {
     let trial_perc: f32 = (100.0 / arg_trials as f32) * (vec_success as f32);
     let trial_num: String = arg_trials.to_formatted_string(&Locale::en);
     let table_data = table!(["Chance to drop", r->format!("{}%", arg_drop.to_string())],
-									["Number of chests", r->arg_chests.to_string()],
-                       				["Number of trials", r->trial_num],
-									["Calculated chance", r->format!("{:.2}%", trial_perc)],
-									["Elapsed time (sec)", r->time_start.elapsed().as_secs_f64().to_string()]);
+				["Number of chests", r->arg_chests.to_string()],
+                       		["Number of trials", r->trial_num],
+				["Calculated chance", r->format!("{:.2}%", trial_perc)],
+				["Elapsed time (sec)", r->time_start.elapsed().as_secs_f64().to_string()]);
     table_data.printstd();
 }
